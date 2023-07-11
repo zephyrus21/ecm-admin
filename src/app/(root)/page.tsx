@@ -1,12 +1,18 @@
-import { Button } from '@/components/ui/button';
-import { UserButton } from '@clerk/nextjs';
+'use client';
+
+import { useEffect } from 'react';
+
+import { useStoreModal } from '@/hooks/use-store-modal';
 
 const Root = () => {
-  return (
-    <main>
-      <UserButton afterSignOutUrl='/' />
-    </main>
-  );
+  const isOpen = useStoreModal((state) => state.isOpen);
+  const onOpen = useStoreModal((state) => state.onOpen);
+
+  useEffect(() => {
+    if (!isOpen) onOpen();
+  }, [isOpen, onOpen]);
+
+  return <div>Root</div>;
 };
 
 export default Root;
