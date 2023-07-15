@@ -9,15 +9,15 @@ import {
   Store as StoreIcon,
 } from 'lucide-react';
 
+import { cn } from '@/lib/utils';
 import { Store } from '@prisma/client';
 import { useStoreModal } from '@/hooks/use-store-modal';
+import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import {
   Command,
   CommandEmpty,
@@ -26,14 +26,14 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '../ui/command';
+} from '@/components/ui/command';
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
 >;
 
 type StoreSwitcherProps = {
-  items?: Store[];
+  items: Store[];
 } & PopoverTriggerProps;
 
 const StoreSwitcher = ({ items = [], className }: StoreSwitcherProps) => {
@@ -67,7 +67,7 @@ const StoreSwitcher = ({ items = [], className }: StoreSwitcherProps) => {
           aria-label='Select a store'
           className={cn('w-48 justify-between', className)}>
           <StoreIcon className='mr-2 h-4 w-4' />
-          Current Store
+          {currentStore?.label}
           <ChevronsUpDown className='ml-auto h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
