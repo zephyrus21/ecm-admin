@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
-      <ClerkProvider>
+    <ClerkProvider>
+      <html lang='en'>
         <body className={inter.className}>
           <ToasterProvider />
           <ModalProvider />
           {children}
         </body>
-      </ClerkProvider>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 }
