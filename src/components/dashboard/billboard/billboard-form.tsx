@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import AlertModal from '@/components/modals/alert-modal';
-import ImageUpload from '../ui/image-upload';
+import ImageUpload from '@/components/ui/image-upload';
 
 type BillboardFormProps = {
   initialData: Billboard | null;

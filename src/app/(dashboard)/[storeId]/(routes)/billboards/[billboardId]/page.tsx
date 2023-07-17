@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import prismadb from '@/lib/prismadb';
-import BillboardForm from '@/components/dashboard/billboard-form';
+import BillboardForm from '@/components/dashboard/billboard/billboard-form';
 
 type BillBoardPageProps = {
   params: {

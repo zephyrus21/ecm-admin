@@ -15,7 +15,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Copy, Edit, MoreHorizontal, Trash2 } from 'lucide-react';
 import axios from 'axios';
-import AlertModal from '../modals/alert-modal';
+import AlertModal from '../../modals/alert-modal';
 
 type CellActionProps = {
   data: BillboardColumn;

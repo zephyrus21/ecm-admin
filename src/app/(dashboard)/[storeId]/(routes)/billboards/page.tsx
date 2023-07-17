@@ -3,8 +3,8 @@ import { NextPage } from 'next';
 import { format } from 'date-fns';
 
 import prismadb from '@/lib/prismadb';
-import BillboardClient from '@/components/dashboard/billboard-client';
-import { BillboardColumn } from '@/components/dashboard/billboard-column';
+import BillboardClient from '@/components/dashboard/billboard/billboard-client';
+import { BillboardColumn } from '@/components/dashboard/billboard/billboard-column';
 
 type BillboardsProps = {
   params: {
