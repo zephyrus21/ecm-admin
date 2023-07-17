@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import prismadb from '@/lib/prismadb';
-import SizeForm from '@/components/dashboard/size/size-form';
+import SizeForm from '@/components/dashboard/color/color-form';
 
 type SizePageProps = {
   params: {
