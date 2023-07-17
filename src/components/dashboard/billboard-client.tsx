@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { BillboardColumn, columns } from './billboard-column';
 import { DataTable } from '@/components/ui/data-table';
+import ApiList from '@/components/ui/api-list';
 
 type BillboardClientProps = {
   data: BillboardColumn[];
@@ -31,8 +32,10 @@ const BillboardClient = ({ data }: BillboardClientProps) => {
           Add New
         </Button>
       </div>
-      <Separator />
       <DataTable searchKey='label' columns={columns} data={data} />
+      <Separator />
+      <Heading title='API' description='API calls for BillBoards' />
+      <ApiList entityName='billboards' entityIdName='billboardId' />
     </>
   );
 };
