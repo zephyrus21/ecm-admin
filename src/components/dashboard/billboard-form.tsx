@@ -24,6 +24,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import AlertModal from '@/components/modals/alert-modal';
+import ImageUpload from '../ui/image-upload';
 
 type BillboardFormProps = {
   initialData: Billboard | null;
@@ -39,7 +40,6 @@ type BillboardFormValue = z.infer<typeof formSchema>;
 const BillboardForm = ({ initialData }: BillboardFormProps) => {
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -60,9 +60,17 @@ const BillboardForm = ({ initialData }: BillboardFormProps) => {
   const onSubmit = async (data: BillboardFormValue) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, data);
+      if (initialData) {
+        await axios.patch(
+          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          data
+        );
+      } else {
+        await axios.post(`/api/${params.storeId}/billboards`, data);
+      }
       router.refresh();
-      toast.success('Settings updated!');
+      router.push(`/${params.storeId}/billboards`);
+      toast.success(toastMessage);
     } catch (error) {
       toast.error('Something went wrong!');
     } finally {
@@ -73,10 +81,12 @@ const BillboardForm = ({ initialData }: BillboardFormProps) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(
+        `/api/${params.storeId}/billboards/${params.billboardId}`
+      );
       router.refresh();
       router.push('/');
-      toast.success('Store deleted!');
+      toast.success('Billboard deleted!');
     } catch (error) {
       toast.error('Make sure you remove all products and categories first.');
     } finally {
@@ -128,6 +138,24 @@ const BillboardForm = ({ initialData }: BillboardFormProps) => {
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name='imageUrl'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Background Image</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange('')}
+                    value={field.value ? [field.value] : []}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Button disabled={loading} type='submit' className='ml-auto'>
             {action}
           </Button>
