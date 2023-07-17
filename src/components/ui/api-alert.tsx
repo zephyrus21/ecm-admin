@@ -31,6 +31,7 @@ const ApiAlert = ({
     navigator.clipboard.writeText(description);
     toast.success('Copied to Clipboard!');
   };
+
   return (
     <Alert>
       <Server className='h-4 w-4' />
