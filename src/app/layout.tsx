@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang='en'>
-        <body className={inter.className}>
+        <body suppressHydrationWarning={true} className={inter.className}>
           <ToasterProvider />
           <ModalProvider />
           {children}

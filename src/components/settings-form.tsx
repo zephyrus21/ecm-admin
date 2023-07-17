@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { Trash2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -19,6 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import AlertModal from '@/components/modals/alert-modal';
 
 type SettingsFormProps = {
   initialData: Store;
@@ -31,6 +35,9 @@ const formSchema = z.object({
 type SettingsFormValue = z.infer<typeof formSchema>;
 
 const SettingsForm = ({ initialData }: SettingsFormProps) => {
+  const params = useParams();
+  const router = useRouter();
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -40,11 +47,40 @@ const SettingsForm = ({ initialData }: SettingsFormProps) => {
   });
 
   const onSubmit = async (data: SettingsFormValue) => {
-    console.log(data);
+    try {
+      setLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, data);
+      router.refresh();
+      toast.success('Settings updated!');
+    } catch (error) {
+      toast.error('Something went wrong!');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onDelete = async () => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/stores/${params.storeId}`);
+      router.refresh();
+      router.push('/');
+      toast.success('Store deleted!');
+    } catch (error) {
+      toast.error('Make sure you remove all products and categories first.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        loading={loading}
+        onClose={() => setOpen(false)}
+        onConfirm={onDelete}
+      />
       <div className='flex items-center justify-between'>
         <Heading title='Settings' description='Manage Store Preferneces' />
         <Button
