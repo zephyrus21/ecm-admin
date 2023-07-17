@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { Store } from '@prisma/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useOrigin } from '@/hooks/use-origin';
 import Heading from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -23,6 +24,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import AlertModal from '@/components/modals/alert-modal';
+import ApiAlert from '@/components/ui/api-alert';
 
 type SettingsFormProps = {
   initialData: Store;
@@ -37,6 +39,7 @@ type SettingsFormValue = z.infer<typeof formSchema>;
 const SettingsForm = ({ initialData }: SettingsFormProps) => {
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -120,6 +123,12 @@ const SettingsForm = ({ initialData }: SettingsFormProps) => {
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert
+        title='NEXT_PUBLIC_API_URL'
+        description={`${origin}/api/${params.storeId}`}
+        variant='public'
+      />
     </>
   );
 };
