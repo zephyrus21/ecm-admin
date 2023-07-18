@@ -31,7 +31,7 @@ const ProductClient = ({ data }: ProductClientProps) => {
           Add New
         </Button>
       </div>
-      <DataTable searchKey='label' columns={columns} data={data} />
+      <DataTable searchKey='name' columns={columns} data={data} />
       <Separator />
       <Heading title='API' description='API calls for BillBoards' />
       <ApiList entityName='products' entityIdName='productId' />
