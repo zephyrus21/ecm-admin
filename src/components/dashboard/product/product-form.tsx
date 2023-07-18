@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -31,6 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type ProductFormProps = {
   initialData:
@@ -297,6 +299,48 @@ const ProductForm = ({
                     </SelectContent>
                   </Select>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='isFeatured'
+              render={({ field }) => (
+                <FormItem className='flex items-start space-x-3 space-y-0 rounded-md border p-4'>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      // @ts-ignore
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className='space-y-1 leading-1'>
+                    <FormLabel>Featured</FormLabel>
+                    <FormDescription>
+                      Featured products will be displayed on the home page.
+                    </FormDescription>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='isArchived'
+              render={({ field }) => (
+                <FormItem className='flex items-start space-x-3 space-y-0 rounded-md border p-4'>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      // @ts-ignore
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className='space-y-1 leading-1'>
+                    <FormLabel>Archived</FormLabel>
+                    <FormDescription>
+                      Archived products will be hidden from the store.
+                    </FormDescription>
+                  </div>
                 </FormItem>
               )}
             />
