@@ -3,8 +3,8 @@ import { NextPage } from 'next';
 import { format } from 'date-fns';
 
 import prismadb from '@/lib/prismadb';
-import SizeClient from '@/components/dashboard/color/color-client';
-import { SizeColumn } from '@/components/dashboard/color/color-column';
+import { SizeColumn } from '@/components/dashboard/size/size-column';
+import SizeClient from '@/components/dashboard/size/size-client';
 
 type SizesProps = {
   params: {
