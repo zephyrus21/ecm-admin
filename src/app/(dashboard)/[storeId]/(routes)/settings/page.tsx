@@ -18,6 +18,7 @@ const Settings = async ({ params: { storeId } }: SettingsProps) => {
 
   const store = await prismadb.store.findFirst({
     where: {
+      id: storeId,
       userId,
     },
   });
